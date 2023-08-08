@@ -13,7 +13,7 @@ require("dotenv").config();
 
 //====================For Regestration===================
 const UserRoutes = require("./Routes/StudentsRoutes");
-
+app.use("/api/students", UserRoutes);
 
 
 
