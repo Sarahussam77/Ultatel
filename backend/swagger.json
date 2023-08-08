@@ -1,0 +1,156 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Students API",
+      "version": "1.0.0",
+      "description": "API documentation for managing students"
+    },
+    "paths": {
+      "/api/students": {
+        "get": {
+          "summary": "Get a list of all students",
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {}
+              }
+            }
+          }
+        }
+      },
+      "/api/students/create":{
+        "post": {
+            "summary": "Add a new student",
+            "requestBody": {
+              "description": "Student data",
+              "required": true,
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Student"
+                  }
+                }
+              }
+            },
+            "responses": {
+              "200": {
+                "description": "Successful response",
+                "content": {
+                  "application/json": {}
+                }
+              }
+            }
+          }
+      },
+      "/api/students/{id}": {
+        "get": {
+          "summary": "Get a student by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Student ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {}
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a student by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Student ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Updated student data",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {}
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a student by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Student ID",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Student": {
+          "type": "object",
+          "properties": {
+            "Fname": {
+              "type": "string"
+            },
+            "Lname": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string",
+              "enum": ["male", "female"]
+            },
+            "dateOfBirth": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        }
+      }
+    }
+  }
+  
