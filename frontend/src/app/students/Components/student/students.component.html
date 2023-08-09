@@ -37,7 +37,7 @@
           <tr  *ngFor="let student of Students; let i = index">
             <td>{{i+1}}</td>
             <td>{{student.Fname + " "+ student.Lname}}</td>
-            <td>{{student.dateOfBirth}}</td>
+            <td>{{student.dateOfBirth| age}}</td>
             <td>{{student.gender}}</td>
             <td>{{student.email}}</td>
             <td>

@@ -39,8 +39,10 @@ let StudentsSchema = new mongoose.Schema({
 
     image:{
         type:String,
+    },
+    country:{
+        type:String,
     }
-
 
 });
 

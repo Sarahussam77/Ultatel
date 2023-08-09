@@ -39,12 +39,13 @@ var AddNewStudent = async (req, res) => {
       if (err) {
         return res.status(400).json({ error: err.message });
       }
-      const { Fname,Lname, email,gender,dateOfBirth } = req.body;
-
+      const { Fname,Lname, email,gender,dateOfBirth,country } = req.body;
+      
 
       let image = "";
       if (req.file) {
         image = req.file.path;
+        req.body.image=image
       }
 
   // check if the Student already exists
@@ -65,6 +66,7 @@ var AddNewStudent = async (req, res) => {
           gender,
           dateOfBirth,
           image,
+          country
         });
         return res.json({ message: 'Your student added successfully', name: value.name });
       }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { StudentsService } from '../Services/students.service';
+import { StudentsService } from '../../Services/students.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

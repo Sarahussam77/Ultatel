@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AddStudentComponentComponent } from './add-student-component/add-student-component.component';
-import { EditStudentComponentComponent } from './edit-student-component/edit-student-component.component';
-import { DeleteStudentComponentComponent } from './delete-student-component/delete-student-component.component';
+import { AddStudentComponentComponent } from '../add-student-component/add-student-component.component';
+import { EditStudentComponentComponent } from '../edit-student-component/edit-student-component.component';
+import { DeleteStudentComponentComponent } from '../delete-student-component/delete-student-component.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StudentsService } from './Services/students.service';
+import { StudentsService } from '../../Services/students.service';
 
 @Component({
   selector: 'app-students',
@@ -28,10 +28,13 @@ export class StudentsComponent implements OnInit {
     )
   }
   addNewStudent() {
-    this.modalService.open(AddStudentComponentComponent
+    const addedStudent=this.modalService.open(AddStudentComponentComponent
       , {
         centered: true,
       });
+      addedStudent.result.then(() => {
+          this.ngOnInit();
+        })
   }
   editStudent(id:string) {
     const editStudentmodal = this.modalService.open(EditStudentComponentComponent
@@ -46,9 +49,10 @@ export class StudentsComponent implements OnInit {
         centered: true,
       });
     delededStudentmodal.componentInstance.id = id;
-    delededStudentmodal.result.then((result) => {
-      if (result === 'confirmed') {
-        this.ngOnInit();
-      }})
+    delededStudentmodal.result.then(() => {
+      this.ngOnInit();
+    })
   }
+
+
 }
