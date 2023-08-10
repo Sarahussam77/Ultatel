@@ -98,22 +98,20 @@ var GetStudentByID = async (req, res) => {
 
 //fix update
 var UpdateStudentByID = async (req, res) => {
+  const StudentId = req.params.id;
+  const { Fname, Lname, country } = req.body;
   try {
-    var ID = req.params.id;
-    var updatedStudent = req.body;
-    console.log(updatedStudent)
-    await StudentsModel.updateOne(
-      { _id: ID },
-      {
-        Fname: updatedStudent.Fname,
-        Lname: updatedStudent.Lname,
-        
-      }
+    const updatedStudent = await StudentsModel.findByIdAndUpdate(
+      StudentId,
+      { $set: { Fname, Lname, country } },
+      { new: true } 
     );
-    await res.send(updatedStudent);
-  } catch (e) {
-    console.log(e);
-    res.status(400).send("failed to update new Student");
+    if (!updatedStudent) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+    return res.json({ message: 'Student updated successfully', Student: updatedStudent });
+  } catch (error) {
+    return res.status(500).json({ error: 'Error updating Student' });
   }
 };
 var DeleteStudentByID = async (req, res) => {

@@ -6,7 +6,7 @@ const router = new express.Router();
 router.get("/",StudentsController.GetAllStudents);  //okay
 router.get("/:id",StudentsController.GetStudentByID); //okay
 router.post("/create",StudentsController.AddNewStudent); //okay
-router.put("/:id",StudentsController.UpdateStudentByID); //not okay
+router.patch("/:id",StudentsController.UpdateStudentByID); //not okay
 router.delete("/:id",StudentsController.DeleteStudentByID);//okay
 
 
