@@ -1,52 +1,15 @@
 let StudentsModel = require("../Models/studentsModel");
 let checkStudent = require("../Utils/StudentValidate");
 const dotenv = require("dotenv");
-const multer = require("multer");
 dotenv.config();
 
-//#region multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // The folder where the uploaded files will be stored
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-const fileFilter = (req, file, cb) => {
-  // Filter only image files
-  if (file.mimetype.startsWith('image/')) {
-    cb(null, true);
-  } else {
-    cb(new Error('Only image files are allowed!'), false);
-  }
-};
-const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
-  limits: {
-    fileSize: 1024 * 1024, // Maximum file size 1MB
-  },
-}).single('image');
-// end region
+
 
 //# CRUDS regin
 
 var AddNewStudent = async (req, res) => {
   try {
-    // upload the image 
-    upload(req, res, async (err) => {
-      if (err) {
-        return res.status(400).json({ error: err.message });
-      }
       const { Fname,Lname, email,gender,dateOfBirth,country } = req.body;
-      
-
-      let image = "";
-      if (req.file) {
-        image = req.file.path;
-        req.body.image=image
-      }
 
   // check if the Student already exists
       let foundedStudent = await StudentsModel.findOne({ email });
@@ -65,12 +28,11 @@ var AddNewStudent = async (req, res) => {
           email,
           gender,
           dateOfBirth,
-          image,
           country
         });
         return res.json({ message: 'Your student added successfully', name: value.name });
       }
-    });
+    
   } catch (e) {
     return res.status(400).json({ status: "failed" });
   }

@@ -1,49 +1,72 @@
 <div class="registration-form modal-content">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div class="form-icon tooltip-image" (click)="selectFile()"
-    ngbTooltip="Add your image"
-    placement="right"
-    >
-
-      <span >
-        <i class="fa-solid fa-user-plus"></i>
-        <input type="file" #fileInput formControlName="image" style="display: none;" (change)="handleFileChange($event)">
-      </span>
+    <div class="modal-header justify-content-center">
+      <h2>Add New Student</h2>
     </div>
- <div class="row">
-  <div class="col-md-7">
-    <div class="form-group">
-        <input type="text" class="form-control item" id="Fname" formControlName="Fname" placeholder="First Name">
+    <div *ngIf="msg!=''" class="alert-dev justify-content-center">
+      <p class="text-danger alert">{{ msg }}</p>
     </div>
-    <div class="form-group">
-        <input type="text" class="form-control item" id="password" formControlName="Lname" placeholder="Last Name">
+    <div class="row mt-3">
+      <div class="col-md-7">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control item"
+            id="Fname"
+            formControlName="Fname"
+            placeholder="First Name"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control item"
+            id="password"
+            formControlName="Lname"
+            placeholder="Last Name"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control item"
+            id="email"
+            formControlName="email"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label class="mx-5">
+            <input type="radio" formControlName="gender" value="male" /> Male
+          </label>
+          <label>
+            <input type="radio" formControlName="gender" value="female" />
+            Female
+          </label>
+        </div>
+        <div class="form-group">
+          <ng-select
+            [items]="countries"
+            class="item"
+            formControlName="country"
+            placeholder="Country"
+          ></ng-select>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group mt-2">
+          <ngb-datepicker formControlName="dateOfBirth"></ngb-datepicker>
+        </div>
+      </div>
+      <div class="modal-footer mx-5">
+        <button
+          type="submit"
+          [disabled]="!registrationForm.valid"
+          class="btn btn-block create-account"
+        >
+          Create Account
+        </button>
+      </div>
     </div>
-    <div class="form-group">
-        <input type="text" class="form-control item" id="email" formControlName="email" placeholder="Email">
-    </div>
-<div class="form-group mb-2">
-    <label class="mx-5">
-      <input type="radio" formControlName="gender" value="male" /> Male
-    </label>
-    <label>
-      <input type="radio" formControlName="gender" value="female" /> Female
-    </label>
-</div>
-<div class="form-group">
-<ng-select [items]="countries" class="item" formControlName="country" placeholder="Country"></ng-select>
-</div>
-  </div>
-  <div class="col-md-5" >
-    <div class="form-group mt-2">
-      <ngb-datepicker formControlName="dateOfBirth"></ngb-datepicker>
-    </div>
-  </div>
-  <div class="modal-footer mx-5">
-    <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-block create-account">
-      Create Account
-
-    </button>
-</div>
- </div>
   </form>
-  </div>
+</div>

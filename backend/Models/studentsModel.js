@@ -36,10 +36,6 @@ let StudentsSchema = new mongoose.Schema({
     dateOfBirth: {
         type: Date, 
     },
-
-    image:{
-        type:String,
-    },
     country:{
         type:String,
     }

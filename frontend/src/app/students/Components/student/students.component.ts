@@ -11,6 +11,8 @@ import { StudentsService } from '../../Services/students.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  currentPage: number = 1;
+  studentsPerPage: number = 10;
   searchText=''
   Students:any;
   searchInput: string = '';
@@ -23,8 +25,7 @@ searchResults: any[] = [];
       {
         next:(data:any)=>{
           this.Students = data;
-
-          // console.log(this.Students)
+          this.updateSearchResults();
         },
         error:(err)=>{console.log(err)}
       }
@@ -63,6 +64,7 @@ searchResults: any[] = [];
  // search function
 performSearch(key:HTMLInputElement) {
    this.searchText = key.value.toLowerCase();
+   this.updateSearchResults();
   if (this.searchText === '') {
     this.searchResults = [];
   } else {
@@ -76,7 +78,26 @@ performSearch(key:HTMLInputElement) {
 reset(key:HTMLInputElement){
   this.searchText='';
   this.searchResults = [];
+  this.currentPage=1
   key.value=''
 
+}
+updateSearchResults() {
+  if (this.searchText === '') {
+    this.searchResults = this.Students.slice(
+      (this.currentPage - 1) * this.studentsPerPage,
+      this.currentPage * this.studentsPerPage
+    );
+  } else {
+    this.searchResults = this.Students.filter((student: { [key: string]: any }) => {
+      return Object.values(student).some((value) => {
+        return String(value).toLowerCase().includes(this.searchText);
+      });
+    });
+  }
+}
+onPageChange(pageNumber: number) {
+  this.currentPage = pageNumber;
+  this.updateSearchResults();
 }
 }

@@ -13,19 +13,13 @@ i{
 .form-icon:hover,i:hover{
   cursor: pointer;
 }
-.tooltip-image:hover ::after {
-  content: attr(ngbTooltip);
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 5px;
-  background-color: #000;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 4px;
-  white-space: nowrap;
-  z-index: 10;
+h2{
+  color: #5791ff;
+
+}
+.alert-dev{
+  margin: -15px 0px;
+  text-align: center;
 }
 .registration-form .form-icon{
 	text-align: center;

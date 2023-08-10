@@ -8,10 +8,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './add-student-component.component.html',
   styleUrls: ['./add-student-component.component.css']
 })
-export class AddStudentComponentComponent implements OnInit  {
-  registrationForm: FormGroup; // Declare the form group
-   selectedFile:any
-
+export class AddStudentComponentComponent  {
+  registrationForm: FormGroup;
+  msg=''
   constructor(private fb: FormBuilder,
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
@@ -22,11 +21,7 @@ export class AddStudentComponentComponent implements OnInit  {
       gender: ['', Validators.required],
       country: [,Validators.required],
       dateOfBirth: ['',Validators.required],
-      image:['', Validators.required]
     });
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
   countries = [
     "United States",
@@ -45,40 +40,28 @@ export class AddStudentComponentComponent implements OnInit  {
     "Russia",
     "South Korea"
   ];
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-
-
-  selectFile() {
-    this.fileInput.nativeElement.click();
-  }
-
-  handleFileChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    if (inputElement.files && inputElement.files.length > 0) {
-       this.selectedFile = inputElement.files[0];
-
-    }
-
-  }
   onSubmit(): void {
     if (this.registrationForm.valid) {
-      const formData = new FormData();
 if(this.registrationForm.value){
   const jsDate = new Date(this.registrationForm.get('dateOfBirth')?.value.year, this.registrationForm.get('dateOfBirth')?.value.month - 1, this.registrationForm.get('dateOfBirth')?.value.day);
-      formData.append('Fname', this.registrationForm.get('Fname')?.value);
-      formData.append('Lname', this.registrationForm.get('Lname')?.value);
-      formData.append('email', this.registrationForm.get('email')?.value);
-      formData.append('image',this.selectedFile);
-      formData.append('gender', this.registrationForm.get('gender')?.value);
-      formData.append('dateOfBirth', jsDate.toISOString());
-      formData.append('country', this.registrationForm.get('country')?.value);
-      this.studentService.AddNewStudent(formData).subscribe(
+      const Fname=this.registrationForm.get('Fname')?.value
+      const Lname=this.registrationForm.get('Lname')?.value
+      const email=this.registrationForm.get('email')?.value
+      const gender=this.registrationForm.get('gender')?.value
+      const dateOfBirth=jsDate.toISOString()
+      const country=this.registrationForm.get('country')?.value
+      const newStudent={Fname,Lname,email,gender,dateOfBirth,country}
+      this.studentService.AddNewStudent(newStudent).subscribe(
         (data)=>{
           console.log(data);
           this.activeModal.close();
         },
         (err)=>{
            console.log(err);
+           if(err.error.message.includes('dateOfBirth')){
+            this.msg="students age must be >= 5 years old"
+           }else{
+           this.msg=err.error.message}
 
         }
       )
