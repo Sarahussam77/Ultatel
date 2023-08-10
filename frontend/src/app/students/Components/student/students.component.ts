@@ -45,6 +45,9 @@ searchResults: any[] = [];
         centered: true,
       });
     editStudentmodal.componentInstance.id = id;
+    editStudentmodal.result.then(() => {
+      this.ngOnInit();
+    })
   }
   deleteStudent(id:string){
     const delededStudentmodal = this.modalService.open(DeleteStudentComponentComponent

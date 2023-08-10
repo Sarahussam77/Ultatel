@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { StudentsService } from '../../Services/students.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './add-student-component.component.html',
   styleUrls: ['./add-student-component.component.css']
 })
-export class AddStudentComponentComponent {
+export class AddStudentComponentComponent implements OnInit  {
   registrationForm: FormGroup; // Declare the form group
    selectedFile:any
 
@@ -20,20 +20,30 @@ export class AddStudentComponentComponent {
       Lname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
-      country: ['',Validators.required],
+      country: [,Validators.required],
       dateOfBirth: ['',Validators.required],
       image:['', Validators.required]
     });
   }
-  options = [
-     'option1'  ,
-     'option2' ,
-     'option3',
-      'option2' ,
-      'option3',
-      'option1',
-      'option2' ,
-      'option3',
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  countries = [
+    "United States",
+    "Canada",
+    "Germany",
+    "France",
+    "United Kingdom",
+    "Japan",
+    "Australia",
+    "Brazil",
+    "Italy",
+    "Spain",
+    "India",
+    "China",
+    "Mexico",
+    "Russia",
+    "South Korea"
   ];
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 

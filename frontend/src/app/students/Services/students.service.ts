@@ -24,7 +24,7 @@ export class StudentsService {
     return this.HTTP.post(this.Base_URL+"/create", newStudent);
   }
   UpdateStudent(id:any,updatedStudent:any){
-    return this.HTTP.put(this.Base_URL + "/" + id, updatedStudent);
+    return this.HTTP.patch(this.Base_URL + "/" + id, updatedStudent);
   }
   deleteStudent(id: any) {
     return this.HTTP.delete(this.Base_URL + "/" + id);

@@ -1,1 +1,23 @@
-<p>edit-student-component works! {{id}}</p>
+<div class="registration-form modal-content">
+  <div class="modal-header justify-content-center">
+   <h2>Edit Student</h2>
+</div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <input type="text" class="form-control item" id="Fname" formControlName="Fname" placeholder="First Name">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control item" id="password" formControlName="Lname" placeholder="Last Name">
+    </div>
+<div class="form-group">
+<ng-select [items]="countries" class="item" formControlName="country" placeholder="Country"></ng-select>
+</div>
+
+  <div class="modal-footer justify-content-center">
+    <button type="submit" class="btn btn-block create-account">
+      Update student
+    </button>
+</div>
+
+  </form>
+  </div>
