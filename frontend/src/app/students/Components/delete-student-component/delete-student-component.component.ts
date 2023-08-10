@@ -14,11 +14,11 @@ constructor(private studentService:StudentsService
   public activeModal: NgbActiveModal){}
 deleteStudent() {
     this.studentService.deleteStudent(this.id).subscribe(
-      () =>  this.activeModal.close('confirmed')
+      () =>  this.activeModal.close()
       ,
       (err) => console.log(err)
     );
-    this.activeModal.close('confirmed');
+    this.activeModal.close();
 }
 closeModel(){
   this.activeModal.close();

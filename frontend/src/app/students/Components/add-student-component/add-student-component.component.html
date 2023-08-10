@@ -1,8 +1,12 @@
 <div class="registration-form modal-content">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div class="form-icon">
-      <span>
-        <i class="fa-solid fa-user-plus" (click)="selectFile()"></i>
+    <div class="form-icon tooltip-image" (click)="selectFile()"
+    ngbTooltip="Add your image"
+    placement="right"
+    >
+
+      <span >
+        <i class="fa-solid fa-user-plus"></i>
         <input type="file" #fileInput formControlName="image" style="display: none;" (change)="handleFileChange($event)">
       </span>
     </div>
@@ -35,7 +39,10 @@
     </div>
   </div>
   <div class="modal-footer mx-5">
-    <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-block create-account">Create Account</button>
+    <button type="submit" [disabled]="!registrationForm.valid" class="btn btn-block create-account">
+      Create Account
+
+    </button>
 </div>
  </div>
   </form>

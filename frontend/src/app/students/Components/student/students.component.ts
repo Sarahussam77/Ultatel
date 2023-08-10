@@ -11,7 +11,10 @@ import { StudentsService } from '../../Services/students.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  searchText=''
   Students:any;
+  searchInput: string = '';
+searchResults: any[] = [];
   constructor(private modalService: NgbModal,
     private studentService:StudentsService) {}
   ngOnInit(): void {
@@ -21,7 +24,7 @@ export class StudentsComponent implements OnInit {
         next:(data:any)=>{
           this.Students = data;
 
-          console.log(this.Students)
+          // console.log(this.Students)
         },
         error:(err)=>{console.log(err)}
       }
@@ -54,5 +57,23 @@ export class StudentsComponent implements OnInit {
     })
   }
 
+ // search function
+performSearch(key:HTMLInputElement) {
+   this.searchText = key.value.toLowerCase();
+  if (this.searchText === '') {
+    this.searchResults = [];
+  } else {
+    this.searchResults = this.Students.filter((student: { [key: string]: any }) => {
+      return Object.values(student).some(value => {
+        return String(value).toLowerCase().includes(this.searchText);
+      });
+    });
+  }
+}
+reset(key:HTMLInputElement){
+  this.searchText='';
+  this.searchResults = [];
+  key.value=''
 
+}
 }

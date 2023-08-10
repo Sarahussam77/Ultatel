@@ -7,8 +7,8 @@
         </div>
         <div class="col-sm-9 col-xs-12 text-right">
           <div class="btn_group">
-            <input type="text" class="form-control" placeholder="Search" />
-            <button class="btn btn-default" title="Reload">
+            <input #key  (keyup)="performSearch(key)"  type="text" class="form-control" placeholder="Search" />
+            <button (click)="reset(key)" class="btn btn-default" title="Reload">
               <i class="fa fa-sync-alt"></i>
             </button>
             <button (click)="addNewStudent()" class="btn btn-default float-right">
@@ -24,33 +24,59 @@
         <thead>
           <tr>
             <th>#</th>
+            <!-- <th>Image</th> -->
             <th>Full Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Email</th>
-            <!-- <th>Country</th> -->
+            <th>Country</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-
-          <tr  *ngFor="let student of Students; let i = index">
-            <td>{{i+1}}</td>
-            <td>{{student.Fname + " "+ student.Lname}}</td>
-            <td>{{student.dateOfBirth| age}}</td>
-            <td>{{student.gender}}</td>
-            <td>{{student.email}}</td>
-            <td>
-              <ul class="action-list">
-                <li>
-                  <a (click)="editStudent(student._id)" data-tip="edit"><i class="fa fa-edit"></i></a>
-                </li>
-                <li>
-                  <a (click)="deleteStudent(student._id)" data-tip="delete"><i class="fa fa-trash"></i></a>
-                </li>
-              </ul>
-            </td>
-          </tr>
+<!-- <img src=" http://localhost:4200/uploads/1691649526013-editor.png"> -->
+  <ng-container *ngIf="searchResults.length>0 else noResult;">
+    <tr  *ngFor="let student of searchResults; let i = index">
+      <td>{{i+1}}</td>
+      <!-- <td><img [src]="student.image"/></td> -->
+      <td>{{student.Fname + " "+ student.Lname}}</td>
+      <td>{{student.dateOfBirth| age}}</td>
+      <td>{{student.gender}}</td>
+      <td>{{student.email}}</td>
+      <td>{{student.country}}</td>
+      <td>
+        <ul class="action-list">
+          <li>
+            <a (click)="editStudent(student._id)" data-tip="edit"><i class="fa fa-edit"></i></a>
+          </li>
+          <li>
+            <a (click)="deleteStudent(student._id)" data-tip="delete"><i class="fa fa-trash"></i></a>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </ng-container>
+  <ng-template #noResult>
+    <tr  *ngFor="let student of Students; let i = index">
+      <td>{{i+1}}</td>
+      <!-- <td><img [src]="student.image"/></td> -->
+      <td>{{student.Fname + " "+ student.Lname}}</td>
+      <td>{{student.dateOfBirth| age}}</td>
+      <td>{{student.gender}}</td>
+      <td>{{student.email}}</td>
+      <td>{{student.country}}</td>
+      <td>
+        <ul class="action-list">
+          <li>
+            <a (click)="editStudent(student._id)" data-tip="edit"><i class="fa fa-edit"></i></a>
+          </li>
+          <li>
+            <a (click)="deleteStudent(student._id)" data-tip="delete"><i class="fa fa-trash"></i></a>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </ng-template>
 
                </tbody>
 
