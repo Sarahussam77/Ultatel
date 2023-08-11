@@ -71,3 +71,39 @@ testem.log
 Thumbs.db
 ####################
 
+
+# compiled output
+nest-backend/dist
+nest-backend/node_modules
+
+# Logs
+nest-backend/logs
+nest-backend/*.log
+nest-backend/npm-debug.log*
+nest-backend/pnpm-debug.log*
+nest-backend/yarn-debug.log*
+nest-backend/yarn-error.log*
+nest-backend/lerna-debug.log*
+
+# OS
+nest-backend/.DS_Store
+
+# Tests
+nest-backend/coverage
+nest-backend/.nyc_output
+
+# IDEs and editors
+nest-backend/.idea
+nest-backend/.project
+nest-backend/.classpath
+nest-backend/.c9/
+nest-backend/*.launch
+nest-backend/.settings/
+nest-backend/*.sublime-workspace
+
+# IDE - VSCode
+nest-backend/.vscode/*
+nest-backend/!.vscode/settings.json
+nest-backend/!.vscode/tasks.json
+nest-backend/!.vscode/launch.json
+nest-backend/!.vscode/extensions.json
