@@ -25,7 +25,7 @@ searchResults: any[] = [];
       {
         next:(data:any)=>{
           this.Students = data;
-          this.updateSearchResults();
+
         },
         error:(err)=>{console.log(err)}
       }
@@ -38,7 +38,9 @@ searchResults: any[] = [];
       });
       addedStudent.result.then(() => {
           this.ngOnInit();
-        })
+        }).catch(error => {
+          console.error("An error occurred:", error);
+        });
   }
   editStudent(id:string) {
     const editStudentmodal = this.modalService.open(EditStudentComponentComponent
@@ -48,7 +50,9 @@ searchResults: any[] = [];
     editStudentmodal.componentInstance.id = id;
     editStudentmodal.result.then(() => {
       this.ngOnInit();
-    })
+    }).catch(error => {
+      console.error("An error occurred:", error);
+    });
   }
   deleteStudent(id:string){
     const delededStudentmodal = this.modalService.open(DeleteStudentComponentComponent
@@ -56,23 +60,33 @@ searchResults: any[] = [];
         centered: true,
       });
     delededStudentmodal.componentInstance.id = id;
+    if(delededStudentmodal.result){
     delededStudentmodal.result.then(() => {
       this.ngOnInit();
-    })
+    }).catch(error => {
+      console.error("An error occurred:", error);
+    });
   }
+}
 
  // search function
 performSearch(key:HTMLInputElement) {
    this.searchText = key.value.toLowerCase();
-   this.updateSearchResults();
+
   if (this.searchText === '') {
     this.searchResults = [];
   } else {
     this.searchResults = this.Students.filter((student: { [key: string]: any }) => {
-      return Object.values(student).some(value => {
-        return String(value).toLowerCase().includes(this.searchText);
+      return Object.keys(student).some(key => {
+        if (key !== '_id') {
+          const value = student[key];
+          return String(value).toLowerCase().includes(this.searchText);
+        }
+        return false;
       });
     });
+
+    console.log(this.searchResults);
   }
 }
 reset(key:HTMLInputElement){
@@ -82,22 +96,9 @@ reset(key:HTMLInputElement){
   key.value=''
 
 }
-updateSearchResults() {
-  if (this.searchText === '') {
-    this.searchResults = this.Students.slice(
-      (this.currentPage - 1) * this.studentsPerPage,
-      this.currentPage * this.studentsPerPage
-    );
-  } else {
-    this.searchResults = this.Students.filter((student: { [key: string]: any }) => {
-      return Object.values(student).some((value) => {
-        return String(value).toLowerCase().includes(this.searchText);
-      });
-    });
-  }
-}
+
 onPageChange(pageNumber: number) {
   this.currentPage = pageNumber;
-  this.updateSearchResults();
+
 }
 }

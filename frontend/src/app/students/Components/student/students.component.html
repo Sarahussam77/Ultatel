@@ -35,31 +35,11 @@
         </thead>
         <tbody>
 <!-- <img src=" http://localhost:4200/uploads/1691649526013-editor.png"> -->
-  <ng-container *ngIf="searchResults.length>0 else noResult;">
-    <tr  *ngFor="let student of searchResults; let i = index">
-      <td>{{i+1}}</td>
-      <!-- <td><img [src]="student.image"/></td> -->
-      <td>{{student.Fname + " "+ student.Lname}}</td>
-      <td>{{student.dateOfBirth| age}}</td>
-      <td>{{student.gender}}</td>
-      <td>{{student.email}}</td>
-      <td>{{student.country}}</td>
-      <td>
-        <ul class="action-list">
-          <li>
-            <a (click)="editStudent(student._id)" data-tip="edit"><i class="fa fa-edit"></i></a>
-          </li>
-          <li>
-            <a (click)="deleteStudent(student._id)" data-tip="delete"><i class="fa fa-trash"></i></a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </ng-container>
-  <ng-template #noResult>
-    <tr  *ngFor="let student of Students.slice(
+    <tr  *ngFor="let student of (searchResults.length > 0 ? searchResults?.slice(
       (currentPage - 1) * studentsPerPage,
-      currentPage * studentsPerPage); let i = index">
+      currentPage * studentsPerPage) : Students?.slice(
+        (currentPage - 1) * studentsPerPage,
+        currentPage * studentsPerPage)) let i = index">
       <td>{{i+1}}</td>
       <!-- <td><img [src]="student.image"/></td> -->
       <td>{{student.Fname + " "+ student.Lname}}</td>
@@ -78,7 +58,7 @@
         </ul>
       </td>
     </tr>
-  </ng-template>
+
 
                </tbody>
 
@@ -87,7 +67,7 @@
     <div class="panel-footer">
       <div class="row">
         <div class="col-sm-6 col-xs-6">
-          <ngb-pagination
+          <ngb-pagination *ngIf="Students"
         [collectionSize]="Students.length"
         [pageSize]="studentsPerPage"
         [(page)]="currentPage"
