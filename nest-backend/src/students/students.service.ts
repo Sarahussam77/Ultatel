@@ -6,7 +6,6 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { CreateStudentDto } from "./dto/create-student.dto/create-student.dto";
-// import { StudentInterface } from './student.interface';
 import { Student, StudentDocument } from "./student.model";
 import { UpdateStudentDto } from "./dto/update-student.dto/update-student.dto";
 
@@ -18,17 +17,14 @@ export class StudentsService {
   ) {}
 
   async create(createStudentDto: CreateStudentDto): Promise<Student> {
-    // Check if the email already exists
     const existingStudent = await this.studentModel
       .findOne({ email: createStudentDto.email })
       .exec();
 
     if (existingStudent) {
-      // Email already exists, throw an error
       throw new ConflictException({ message: "User already exists" });
     }
 
-    // Email doesn't exist, create and save the student
     const createdStudent = new this.studentModel(createStudentDto);
     return createdStudent.save();
   }
