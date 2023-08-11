@@ -10,7 +10,9 @@
         <input type="text" class="form-control item" id="password" formControlName="Lname" placeholder="Last Name">
     </div>
 <div class="form-group">
-<ng-select [items]="countries" class="item" formControlName="country" placeholder="Country"></ng-select>
+<ng-select [items]="countries"
+  [clearable]="false"
+class="item" formControlName="country" placeholder="Country"></ng-select>
 </div>
 
   <div class="modal-footer justify-content-center">

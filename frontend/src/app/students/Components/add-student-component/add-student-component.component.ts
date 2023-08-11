@@ -15,9 +15,9 @@ export class AddStudentComponentComponent  {
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
     this.registrationForm = new FormGroup({
-      Fname: new FormControl ('', Validators.required),
-      Lname: new FormControl ('', Validators.required),
-      email: new FormControl ('', [Validators.required, Validators.email]),
+      Fname: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      Lname: new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      email: new FormControl ('', [Validators.required, Validators.email,Validators.pattern(/^[\w\.-]+@\w+\.\w+(\.\w+)?$/i)]),
       gender: new FormControl ('', Validators.required),
       country: new FormControl ( null,Validators.required),
       dateOfBirth: new FormControl (null,Validators.required),
