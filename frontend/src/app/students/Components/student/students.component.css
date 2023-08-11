@@ -9,6 +9,9 @@
 i:hover{
   cursor: pointer;
 }
+.item{
+  width: 150px;
+}
 .panel .panel-heading{
     padding: 20px 15px;
 }

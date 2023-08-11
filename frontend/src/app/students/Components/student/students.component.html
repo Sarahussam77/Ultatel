@@ -1,23 +1,38 @@
 <div class="col-md-12">
   <div class="panel">
     <div class="panel-heading">
-      <div class="row">
+      <div class="row mb-2">
         <div class="col col-sm-3 col-xs-12">
           <h4 class="title">Students <span>List</span></h4>
         </div>
         <div class="col-sm-9 col-xs-12 text-right">
           <div class="btn_group">
-            <input #key  (keyup)="performSearch(key)"  type="text" class="form-control" placeholder="Search" />
+            <input
+              #key
+              (keyup)="performSearch(key)"
+              type="text"
+              class="form-control"
+              placeholder="Search"
+            />
             <button (click)="reset(key)" class="btn btn-default" title="Reload">
               <i class="fa fa-sync-alt"></i>
             </button>
-            <button (click)="addNewStudent()" class="btn btn-default float-right">
+            <button
+              (click)="addNewStudent()"
+              class="btn btn-default float-right"
+            >
               Add New Student
             </button>
-
           </div>
         </div>
       </div>
+      <ng-select
+            [items]="Page"
+            [(ngModel)]="studentsPerPage"
+            class="item"
+            placeholder="Number of rows"
+            [clearable]="false"
+          ></ng-select>
     </div>
     <div class="panel-body table-responsive">
       <table class="table">
@@ -34,47 +49,60 @@
           </tr>
         </thead>
         <tbody>
-<!-- <img src=" http://localhost:4200/uploads/1691649526013-editor.png"> -->
-    <tr  *ngFor="let student of (searchResults.length > 0 ? searchResults?.slice(
-      (currentPage - 1) * studentsPerPage,
-      currentPage * studentsPerPage) : Students?.slice(
-        (currentPage - 1) * studentsPerPage,
-        currentPage * studentsPerPage)) let i = index">
-      <td>{{i+1}}</td>
-      <!-- <td><img [src]="student.image"/></td> -->
-      <td>{{student.Fname + " "+ student.Lname}}</td>
-      <td>{{student.dateOfBirth| age}}</td>
-      <td>{{student.gender}}</td>
-      <td>{{student.email}}</td>
-      <td>{{student.country}}</td>
-      <td>
-        <ul class="action-list">
-          <li>
-            <a (click)="editStudent(student._id)" data-tip="edit"><i class="fa fa-edit"></i></a>
-          </li>
-          <li>
-            <a (click)="deleteStudent(student._id)" data-tip="delete"><i class="fa fa-trash"></i></a>
-          </li>
-        </ul>
-      </td>
-    </tr>
-
-
-               </tbody>
-
+          <!-- <img src=" http://localhost:4200/uploads/1691649526013-editor.png"> -->
+          <tr
+            *ngFor="
+              let student of searchResults.length > 0
+                ? searchResults?.slice(
+                    (currentPage - 1) * studentsPerPage,
+                    currentPage * studentsPerPage
+                  )
+                : Students?.slice(
+                    (currentPage - 1) * studentsPerPage,
+                    currentPage * studentsPerPage
+                  );
+              let i = index
+            "
+          >
+            <td>{{ i + 1 }}</td>
+            <!-- <td><img [src]="student.image"/></td> -->
+            <td>{{ student.Fname + " " + student.Lname }}</td>
+            <td>{{ student.dateOfBirth | age }}</td>
+            <td>{{ student.gender }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.country }}</td>
+            <td>
+              <ul class="action-list">
+                <li>
+                  <a (click)="editStudent(student._id)" data-tip="edit"
+                    ><i class="fa fa-edit"></i
+                  ></a>
+                </li>
+                <li>
+                  <a (click)="deleteStudent(student._id)" data-tip="delete"
+                    ><i class="fa fa-trash"></i
+                  ></a>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="panel-footer">
       <div class="row">
         <div class="col-sm-6 col-xs-6">
-          <ngb-pagination *ngIf="Students"
-        [collectionSize]="Students.length"
-        [pageSize]="studentsPerPage"
-        [(page)]="currentPage"
-        size="sm"
-        aria-label="Students Pagination"
-        (pageChange)="onPageChange($event)"
-      ></ngb-pagination>
+          <ngb-pagination
+            *ngIf="Students"
+            [collectionSize]="
+              searchResults.length > 0 ? searchResults.length : Students.length
+            "
+            [pageSize]="studentsPerPage"
+            [(page)]="currentPage"
+            size="sm"
+            aria-label="Students Pagination"
+            (pageChange)="onPageChange($event)"
+          ></ngb-pagination>
         </div>
       </div>
     </div>

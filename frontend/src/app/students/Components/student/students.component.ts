@@ -12,7 +12,8 @@ import { StudentsService } from '../../Services/students.service';
 })
 export class StudentsComponent implements OnInit {
   currentPage: number = 1;
-  studentsPerPage: number = 10;
+  studentsPerPage: number=10;
+  Page=[5,10];
   searchText=''
   Students:any;
   searchInput: string = '';
@@ -72,7 +73,6 @@ searchResults: any[] = [];
  // search function
 performSearch(key:HTMLInputElement) {
    this.searchText = key.value.toLowerCase();
-
   if (this.searchText === '') {
     this.searchResults = [];
   } else {
