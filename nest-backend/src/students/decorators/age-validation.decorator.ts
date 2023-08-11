@@ -1,12 +1,11 @@
 import {
-  ValidationArguments,
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from "class-validator";
 
 @ValidatorConstraint({ name: "age", async: false })
 export class AgeValidation implements ValidatorConstraintInterface {
-  validate(dateOfBirth: Date, args: ValidationArguments) {
+  validate(dateOfBirth: Date) {
     const today = new Date();
     const birthDate = new Date(dateOfBirth);
     const age = today.getFullYear() - birthDate.getFullYear();
@@ -26,7 +25,7 @@ export class AgeValidation implements ValidatorConstraintInterface {
     return true;
   }
 
-  defaultMessage(args: ValidationArguments) {
+  defaultMessage() {
     return "Date of birth must be >= 5.";
   }
 }
