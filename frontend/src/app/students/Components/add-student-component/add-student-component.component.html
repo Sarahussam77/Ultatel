@@ -21,7 +21,7 @@
           <input
             type="text"
             class="form-control item"
-            id="password"
+            id="Lname"
             formControlName="Lname"
             placeholder="Last Name"
           />
@@ -37,17 +37,18 @@
         </div>
         <div class="form-group mb-2">
           <label class="mx-5">
-            <input type="radio" formControlName="gender" value="male" /> Male
+            <input type="radio" id="gender" formControlName="gender" value="male" /> Male
           </label>
           <label>
-            <input type="radio" formControlName="gender" value="female" />
+            <input type="radio"  id="gender" formControlName="gender" value="female" />
             Female
           </label>
         </div>
         <div class="form-group">
           <ng-select
             [items]="countries"
-            class="item"
+            class="item form-control"
+            id="country"
             formControlName="country"
             placeholder="Country"
           ></ng-select>
@@ -55,7 +56,7 @@
       </div>
       <div class="col-md-5">
         <div class="form-group mt-2">
-          <ngb-datepicker formControlName="dateOfBirth"></ngb-datepicker>
+          <ngb-datepicker  id="dateOfBirth" formControlName="dateOfBirth"></ngb-datepicker>
         </div>
       </div>
       <div class="modal-footer mx-5">

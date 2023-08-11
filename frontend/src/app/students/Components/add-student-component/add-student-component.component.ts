@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, } from '@angular/core';
+import { FormGroup,  Validators, FormControl } from '@angular/forms';
 import { StudentsService } from '../../Services/students.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,16 +11,16 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class AddStudentComponentComponent  {
   registrationForm: FormGroup;
   msg=''
-  constructor(private fb: FormBuilder,
+  constructor(
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
-    this.registrationForm = this.fb.group({
-      Fname: ['', Validators.required],
-      Lname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
-      country: [,Validators.required],
-      dateOfBirth: ['',Validators.required],
+    this.registrationForm = new FormGroup({
+      Fname: new FormControl ('', Validators.required),
+      Lname: new FormControl ('', Validators.required),
+      email: new FormControl ('', [Validators.required, Validators.email]),
+      gender: new FormControl ('', Validators.required),
+      country: new FormControl ( null,Validators.required),
+      dateOfBirth: new FormControl (null,Validators.required),
     });
   }
   countries = [

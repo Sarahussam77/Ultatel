@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudentsService } from '../../Services/students.service';
 
@@ -14,13 +14,13 @@ export class EditStudentComponentComponent {
   registrationForm: FormGroup;
    selectedFile:any
 
-  constructor(private fb: FormBuilder,
+  constructor(
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
-      this.registrationForm = this.fb.group({
-        Fname: [],
-        Lname: [],
-        country: [],
+      this.registrationForm = new FormGroup({
+        Fname:new FormControl (),
+        Lname: new FormControl (),
+        country: new FormControl (),
 
       });
   }
@@ -30,10 +30,10 @@ export class EditStudentComponentComponent {
       {
         next:(data:any)=>{
           this.Student = data;
-          this.registrationForm = this.fb.group({
-            Fname: [this.Student.Fname],
-            Lname: [this.Student.Lname],
-            country: [this.Student.country],
+          this.registrationForm.patchValue({
+            Fname: this.Student.Fname,
+            Lname: this.Student.Lname,
+            country: this.Student.country,
 
           });
 
