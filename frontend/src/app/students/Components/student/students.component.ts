@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AddStudentComponentComponent } from '../add-student-component/add-student-component.component';
 import { EditStudentComponentComponent } from '../edit-student-component/edit-student-component.component';
 import { DeleteStudentComponentComponent } from '../delete-student-component/delete-student-component.component';
@@ -19,6 +19,7 @@ export class StudentsComponent implements OnInit {
   searchInput: string = '';
 searchResults: any[] = [];
   constructor(private modalService: NgbModal,
+    private renderer: Renderer2,
     private studentService:StudentsService) {}
   ngOnInit(): void {
 
@@ -101,4 +102,19 @@ onPageChange(pageNumber: number) {
   this.currentPage = pageNumber;
 
 }
+
+
+
+
+
+darkMode = true;
+darkPanelStyles = {
+  background: 'linear-gradient(to right, #2980b9, #2c3e50)',
+};
+
+toggleDarkMode() {
+  this.darkMode = !this.darkMode;
+  this.darkPanelStyles.background = this.darkMode ? 'linear-gradient(to right, #2980b9, #2c3e50)' : 'linear-gradient(to right, rgb(0 0 0 / 81%), rgb(0 0 0))';
+}
+
 }

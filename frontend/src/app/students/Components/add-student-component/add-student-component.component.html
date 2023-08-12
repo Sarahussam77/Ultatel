@@ -1,6 +1,7 @@
 <div class="registration-form modal-content">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="modal-header justify-content-center">
+      <i class="fa-solid fa-xmark"(click)="closeModel()"></i>
       <h2>Add New Student</h2>
     </div>
     <div *ngIf="msg!=''" class="alert-dev justify-content-center">
@@ -15,6 +16,7 @@
             id="Fname"
             formControlName="Fname"
             placeholder="First Name"
+            [title]="registrationForm.get('Fname')?.valid?'':'length must be between 3 and 15'"
           />
         </div>
         <div class="form-group">
@@ -24,6 +26,7 @@
             id="Lname"
             formControlName="Lname"
             placeholder="Last Name"
+            [title]="registrationForm.get('Lname')?.valid?'':'length must be between 3 and 15'"
           />
         </div>
         <div class="form-group">
@@ -33,9 +36,12 @@
             id="email"
             formControlName="email"
             placeholder="Email"
+            [title]="registrationForm.get('email')?.valid?'':'email must be valid'"
           />
         </div>
-        <div class="form-group mb-2">
+        <div class="form-group mb-2"
+        [title]="registrationForm.get('gender')?.valid?'':'select a gender'"
+        >
           <label class="mx-5">
             <input type="radio" id="gender" formControlName="gender" value="male" /> Male
           </label>
@@ -51,12 +57,16 @@
             id="country"
             formControlName="country"
             placeholder="Country"
+            [title]="registrationForm.get('country')?.valid?'':'select a country'"
+
           ></ng-select>
         </div>
       </div>
       <div class="col-md-5">
         <div class="form-group mt-2">
-          <ngb-datepicker  id="dateOfBirth" formControlName="dateOfBirth"></ngb-datepicker>
+          <ngb-datepicker
+          [title]="registrationForm.get('dateOfBirth')?.valid?'':'select birthdate'"
+          id="dateOfBirth" formControlName="dateOfBirth"></ngb-datepicker>
         </div>
       </div>
       <div class="modal-footer mx-5">

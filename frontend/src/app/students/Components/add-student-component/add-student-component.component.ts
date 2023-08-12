@@ -67,6 +67,8 @@ if(this.registrationForm.value){
       )
 }
     }}
-
+    closeModel(){
+      this.activeModal.close();
+    }
 
 }

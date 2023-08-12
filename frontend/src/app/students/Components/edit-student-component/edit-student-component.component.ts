@@ -18,9 +18,9 @@ export class EditStudentComponentComponent {
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
       this.registrationForm = new FormGroup({
-        Fname:new FormControl (),
-        Lname: new FormControl (),
-        country: new FormControl (),
+        Fname:new FormControl (null,[Validators.required]),
+        Lname: new FormControl (null,[Validators.required]),
+        country: new FormControl (null,[Validators.required]),
 
       });
   }
@@ -78,6 +78,10 @@ if(this.registrationForm.value){
         }
       )
 }
-    }}
+    }
+    closeModel(){
+      this.activeModal.close();
+    }
+  }
 
 

@@ -1,13 +1,24 @@
 
 .panel{
-    background: linear-gradient(to right, #2980b9, #2c3e50);
+    /* background: linear-gradient(to right, #2980b9, #2c3e50); */
     padding: 25px 0px 0px 0px;
     border: none;
     min-height: 100vh;
-    /* box-shadow: 0 0 0 5px rgba(0,0,0,0.05),0 0 0 10px rgba(0,0,0,0.05); */
+
 }
 i:hover{
   cursor: pointer;
+}
+mat-slide-toggle{
+  position: absolute;
+  right: 50px;
+  top: 18%;
+
+}
+.custom-pagination {
+  color: white;
+  background-color: black;
+  width: 100%;
 }
 .item{
   width: 150px;

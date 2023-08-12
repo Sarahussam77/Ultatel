@@ -1,5 +1,5 @@
 <div class="col-md-12">
-  <div class="panel">
+  <div class="panel" [ngStyle]="darkPanelStyles">
     <div class="panel-heading">
       <div class="row mb-2">
         <div class="col col-sm-3 col-xs-12">
@@ -33,6 +33,8 @@
             placeholder="Number of rows"
             [clearable]="false"
           ></ng-select>
+          <mat-slide-toggle title="dark mode" (change)="toggleDarkMode()">
+          </mat-slide-toggle>
     </div>
     <div class="panel-body table-responsive">
       <table class="table">
@@ -96,12 +98,12 @@
             *ngIf="Students"
             [collectionSize]="
               searchResults.length > 0 ? searchResults.length : Students.length
-            "
-            [pageSize]="studentsPerPage"
+            "[pageSize]="studentsPerPage"
             [(page)]="currentPage"
             size="sm"
             aria-label="Students Pagination"
             (pageChange)="onPageChange($event)"
+            [ngClass]="darkMode==true ? '' : 'custom-pagination'"
           ></ngb-pagination>
         </div>
       </div>

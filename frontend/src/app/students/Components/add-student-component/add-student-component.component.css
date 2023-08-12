@@ -7,6 +7,14 @@
     padding: 20px 70px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 }
+.fa-xmark{
+  font-size: 35px;
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  color: #5791ff;
+  cursor: pointer;
+}
 i{
   padding-left: 10%!important;
 }
