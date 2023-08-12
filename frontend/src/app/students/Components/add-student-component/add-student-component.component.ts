@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { FormGroup,  Validators, FormControl } from '@angular/forms';
 import { StudentsService } from '../../Services/students.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,9 +8,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './add-student-component.component.html',
   styleUrls: ['./add-student-component.component.css']
 })
-export class AddStudentComponentComponent  {
+export class AddStudentComponentComponent implements OnInit {
   registrationForm: FormGroup;
   msg=''
+  textColor: any;
+  backgroundColor: any;
+  darkMode: any;
   constructor(
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {
@@ -40,6 +43,17 @@ export class AddStudentComponentComponent  {
     "Russia",
     "South Korea"
   ];
+
+  ngOnInit(): void {
+    this.textColor={
+      color: '#5791ff'
+    }
+     this.backgroundColor={
+      backgroundColor:'black'
+    }
+    this.textColor.color = this.darkMode ? '#5791ff' : 'black';
+    this.backgroundColor.backgroundColor=this.darkMode?'#5791ff':'black';
+  }
   onSubmit(): void {
     if (this.registrationForm.valid) {
 if(this.registrationForm.value){

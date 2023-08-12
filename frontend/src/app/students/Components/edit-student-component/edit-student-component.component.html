@@ -1,7 +1,7 @@
 <div class="registration-form modal-content">
   <div class="modal-header justify-content-center">
-    <i class="fa-solid fa-xmark"(click)="closeModel()"></i>
-   <h2>Edit Student</h2>
+    <i [ngStyle]="textColor" class="fa-solid fa-xmark"(click)="closeModel()"></i>
+   <h2 [ngStyle]="textColor">Edit Student</h2>
 </div>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
@@ -22,6 +22,7 @@ class="item" formControlName="country" placeholder="Country"></ng-select>
 
   <div class="modal-footer justify-content-center">
     <button type="submit"
+    [ngStyle]="backgroundColor"
     [disabled]="!registrationForm.valid"
     class="btn btn-block create-account">
       Update student

@@ -49,7 +49,8 @@ searchResults: any[] = [];
       , {
         centered: true,
       });
-    editStudentmodal.componentInstance.id = id;
+    editStudentmodal.componentInstance.id = id
+    editStudentmodal.componentInstance.darkMode=this.darkMode;
     editStudentmodal.result.then(() => {
       this.ngOnInit();
     }).catch(error => {

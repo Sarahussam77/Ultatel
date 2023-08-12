@@ -1,8 +1,8 @@
 <div class="registration-form modal-content">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="modal-header justify-content-center">
-      <i class="fa-solid fa-xmark"(click)="closeModel()"></i>
-      <h2>Add New Student</h2>
+      <i [ngStyle]="textColor" class="fa-solid fa-xmark"(click)="closeModel()"></i>
+      <h2 [ngStyle]="textColor">Add New Student</h2>
     </div>
     <div *ngIf="msg!=''" class="alert-dev justify-content-center">
       <p class="text-danger alert">{{ msg }}</p>
@@ -74,6 +74,7 @@
           type="submit"
           [disabled]="!registrationForm.valid"
           class="btn btn-block create-account"
+          [ngStyle]="backgroundColor"
         >
           Create Account
         </button>

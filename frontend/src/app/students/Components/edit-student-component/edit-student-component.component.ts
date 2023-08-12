@@ -10,9 +10,12 @@ import { StudentsService } from '../../Services/students.service';
 })
 export class EditStudentComponentComponent {
   @Input() id: string='';
+  @Input() darkMode: boolean=true;
   Student:any
   registrationForm: FormGroup;
    selectedFile:any
+  textColor: any;
+  backgroundColor: any;
 
   constructor(
     private studentService:StudentsService,
@@ -25,7 +28,14 @@ export class EditStudentComponentComponent {
       });
   }
   ngOnInit(): void {
-
+    this.textColor={
+      color: '#5791ff'
+    }
+     this.backgroundColor={
+      backgroundColor:'black'
+    }
+    this.textColor.color = this.darkMode ? '#5791ff' : 'black';
+    this.backgroundColor.backgroundColor=this.darkMode?'#5791ff':'black';
     this.studentService.GetStudentByID(this.id).subscribe(
       {
         next:(data:any)=>{
@@ -82,6 +92,7 @@ if(this.registrationForm.value){
     closeModel(){
       this.activeModal.close();
     }
+
   }
 
 
