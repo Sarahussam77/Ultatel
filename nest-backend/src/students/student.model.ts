@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+// import { HydratedDocument } from 'mongoose';
 export enum Gender {
   Male = 'male',
   Female = 'female',
 }
-export type StudentDocument =HydratedDocument<Student>;
+// export type StudentDocument =HydratedDocument<Student>;
 @Schema()
 export class Student  {
   @Prop({ required: true })

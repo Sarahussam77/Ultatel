@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component,  Input,  OnInit } from '@angular/core';
 import { FormGroup,  Validators, FormControl } from '@angular/forms';
 import { StudentsService } from '../../Services/students.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,11 +9,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./add-student-component.component.css']
 })
 export class AddStudentComponentComponent implements OnInit {
+  @Input() darkMode: boolean=true;
   registrationForm: FormGroup;
   msg=''
   textColor: any;
   backgroundColor: any;
-  darkMode: any;
+
   constructor(
     private studentService:StudentsService,
     public activeModal: NgbActiveModal) {

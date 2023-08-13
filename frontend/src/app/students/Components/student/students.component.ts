@@ -43,6 +43,7 @@ searchResults: any[] = [];
         }).catch(error => {
           console.error("An error occurred:", error);
         });
+        addedStudent.componentInstance.darkMode=this.darkMode;
   }
   editStudent(id:string) {
     const editStudentmodal = this.modalService.open(EditStudentComponentComponent

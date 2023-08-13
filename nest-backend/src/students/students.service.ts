@@ -6,14 +6,14 @@ import {
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { CreateStudentDto } from "./dto/create-student.dto/create-student.dto";
-import { Student, StudentDocument } from "./student.model";
+import { Student } from "./student.model";
 import { UpdateStudentDto } from "./dto/update-student.dto/update-student.dto";
 
 @Injectable()
 export class StudentsService {
   constructor(
     @InjectModel(Student.name)
-    private readonly studentModel: Model<StudentDocument>
+    private readonly studentModel: Model<Student>
   ) {}
 
   async create(createStudentDto: CreateStudentDto): Promise<Student> {
@@ -34,11 +34,15 @@ export class StudentsService {
   }
 
   async findById(id: string): Promise<Student> {
-    const student = await this.studentModel.findById(id).exec();
-    if (!student) {
+    try {
+      const student = await this.studentModel.findById(id).exec();
+      if (!student) {
+        throw new NotFoundException(`Student with ID ${id} not found`);
+      }
+      return student;
+    } catch (error) {
       throw new NotFoundException(`Student with ID ${id} not found`);
     }
-    return student;
   }
 
   async updateById(
