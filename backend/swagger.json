@@ -6,7 +6,7 @@
       "description": "API documentation for managing students"
     },
     "paths": {
-      "/api/students": {
+      "/students": {
         "get": {
           "summary": "Get a list of all students",
           "responses": {
@@ -19,7 +19,7 @@
           }
         }
       },
-      "/api/students/create":{
+      "/students/create":{
         "post": {
             "summary": "Add a new student",
             "requestBody": {
@@ -43,7 +43,7 @@
             }
           }
       },
-      "/api/students/{id}": {
+      "/students/{id}": {
         "get": {
           "summary": "Get a student by ID",
           "parameters": [

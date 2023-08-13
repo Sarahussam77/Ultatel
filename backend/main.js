@@ -15,7 +15,7 @@ require("dotenv").config();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //====================For Regestration===================
 const UserRoutes = require("./Routes/StudentsRoutes");
-app.use("/api/students", UserRoutes);
+app.use("/students", UserRoutes);
 
 
 
